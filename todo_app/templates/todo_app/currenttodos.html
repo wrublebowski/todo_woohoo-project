@@ -1,0 +1,24 @@
+{% extends 'todo_app/base.html' %}
+
+{% block content %}
+
+<h1>To do:</h1>
+
+<ul>
+{% for todo in all_todos %}
+
+  <li>
+    <a href="{% url 'detail' todo.id %}">
+    {% if todo.important %}<b>{% endif %}
+    {{ todo.task }}
+    {% if todo.important %}</b>{% endif %}
+
+    {% if todo.description %} <br> {{ todo.description }}{% endif %}
+    <br><br>
+    </a>
+  </li>
+{% endfor %}
+
+</ul>
+
+{% endblock %}
