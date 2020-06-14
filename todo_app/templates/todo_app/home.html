@@ -1,7 +1,32 @@
 {% extends 'todo_app/base.html' %}
 
 {% block content %}
+<div class="row justify-content-center mt-5">
+  <div class="col-md-8 text-center">
+    <br><br><br>
+    <h2 class="font-weight-bold">Plan your tasks with Todo-Woohoo</h2>
+    <h4 class="font-weight-bold">Start now and forget about forgetting</h4>
+  </div>
+</div>
+{% if user.is_authenticated %}
+<div class="row justify-content-center mt-5">
+  <form action="{% url 'logoutuser' %}", method='POST'>
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Log out</button>
+  </form>
+</div>
 
-Welcome home
+{% else %}
+
+<div class="row justify-content-center mt-5">
+    <a href="{% url 'signupuser' %}" class="btn btn-dark active" role="button" aria-pressed="true"  method='POST'>sign up</a>
+</div>
+<div class="row justify-content-center mt-3">
+    <a href="{% url 'loginuser' %}" class="btn btn-secondary active" role="button" aria-pressed="true" method="POST">log in</a>
+</div>
+{% endif %}
 
 {% endblock %}
+
+
+  <div class="col-lg-4 col-md-6">

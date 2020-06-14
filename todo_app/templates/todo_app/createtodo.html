@@ -1,15 +1,15 @@
 {% extends 'todo_app/base.html' %}
 
 {% block content %}
-
-<h2>create a task</h2>
-
+<div class="row justify-content-center mt-5">
+  <h2>Create a new task</h2>
+</div>
 <h2 id='awaria'>{{ message }}</h2>
-
-<form method='POST'>
-  {% csrf_token %}
-  {{ form.as_p }}
-<button type="submit">create task</button>
-</form>
-
+<div class="row justify-content-center my-3">
+  <form method='POST'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-secondary active">create</button>
+  </form>
+</div>
 {% endblock %}

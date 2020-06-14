@@ -1,8 +1,9 @@
 {% extends 'todo_app/base.html' %}
 
 {% block content %}
-
+<div class="row justify-content-center mt-5">
 <h2>{{ todo.task }}</h2>
+</div>
 <form method='POST'>
   {% csrf_token %}
   {{ form.as_p }}
