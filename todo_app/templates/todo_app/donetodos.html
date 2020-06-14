@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1>To do:</h1>
+<h1>Completed:</h1>
 
 <ul>
 {% for todo in all_todos %}
@@ -10,7 +10,9 @@
   <li>
     <a href="{% url 'viewtodo' todo.id %}">
     {% if todo.important %}<b>{% endif %}{{ todo.task }}{% if todo.important %}</b>{% endif %}<br>
-    {% if todo.description %}{{ todo.description }}{% endif %}<br><br>
+    {% if todo.description %}{{ todo.description }}{% endif %}<br>
+    {{ todo.completiontime|date:'M j Y H:i' }}<br><br>
+
     </a>
   </li>
 {% endfor %}

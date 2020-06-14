@@ -1,5 +1,8 @@
 {% if user.is_authenticated %}
 
+<a href="{% url 'currenttodos' %}">current</a>
+<a href="{% url 'createtodo' %}">create</a>
+<a href="{% url 'donetodos' %}">completed</a>
 Logged in as {{ user.username }}
 <br><br>
 <form action="{% url 'logoutuser' %}", method='POST'>
