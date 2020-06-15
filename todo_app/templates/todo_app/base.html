@@ -1,3 +1,5 @@
+{% load static %}
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,20 +10,24 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
-
+    <link rel="icon" type="image/png"  href="{% static 'todo_app/logos.png' %}">
     <title>Todo-Woohoo!</title>
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="{% url 'home' %}">Todo-Woohoo!</a>
+    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #a9f2f2;">
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{% static 'todo_app/logos.png' %}" width="30" height="30" class="d-inline-block align-top">
+      <span>Todo-Woohoo!</span>
+      </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
+        {% if user.is_authenticated %}
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'currenttodos' %}">Current<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{% url 'currenttodos' %}">Current</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'createtodo' %}">Create</a>
@@ -30,9 +36,25 @@
             <a class="nav-link" href="{% url 'donetodos' %}">Completed</a>
           </li>
         </ul>
-        <span class="navbar-text">
-          - Hello {{ user.username }}! You are looking good!
-        </span>
+        {% endif %}
+        <ul class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+          <li>
+            <a href="#" onclick="$('#signOutBtn').click()" class="nav-link">Log out</a>
+            <form style="display: none;" action="{% url 'logoutuser' %}", method='POST'>
+              {% csrf_token %}
+              <button id="signOutBtn" type="submit"></button>
+            </form>
+          </li>
+          {% else %}
+          <li>
+              <a href="{% url 'signupuser' %}" class="nav-link" method='POST'>Sign up</a>
+          </li>
+          <li>
+              <a href="{% url 'loginuser' %}" class="nav-link" method="POST">Log in</a>
+          </li>
+          {% endif %}
+        </ul>
       </div>
     </nav>
 

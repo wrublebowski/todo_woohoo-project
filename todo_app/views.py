@@ -33,6 +33,8 @@ def signupuser(request):
                 return redirect('currenttodos')
             except IntegrityError:
                 return render(request, "todo_app/signupuser.html", {'form':UserCreationForm(), "message":"Username is already taken!"})
+            except ValueError:
+                return render(request, "todo_app/signupuser.html", {'form':UserCreationForm(), "message":"Some info is missing!"})
 
         else:
             # show the same view but with extra message from same dictionary
@@ -49,7 +51,7 @@ def loginuser(request):
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
         # if something goes wrong, user = None
         if user == None:
-            return render(request, "todo_app/loginuser.html", {'form':AuthenticationForm(), "message":"Invalid login or password"})
+            return render(request, "todo_app/loginuser.html", {'form':AuthenticationForm(), "message":"Invalid login or password, try again."})
         else:
             login(request,user)
             return redirect('currenttodos')

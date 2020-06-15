@@ -2,14 +2,39 @@
 
 {% block content %}
 
-<h2>Sign up page</h2>
-
-<h2 id='awaria'>{{ message }}</h2>
-
-<form method='POST'>
-  {% csrf_token %}
-  {{ form.as_p }}
-<button type="submit">Sign Up</button>
-</form>
-
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <h2>Sign up</h2>
+    </div>
+</div>
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        {% if message %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" class="form-control" id="username" aria-describedby="usernameHelp">
+                <small id="usernameHelp" class="form-text text-muted">Try to be unique. We'll let you know if this username is taken.</small>
+            </div>
+            <div class="form-group">
+                <label for="password1">Password</label>
+                <input type="password" name="password1" class="form-control" id="password1" required>
+            </div>
+            <div class="form-group">
+                <label for="password2">Confirm Password</label>
+                <input type="password" name="password2" class="form-control" id="password2" required>
+            </div>
+            <button type="submit" class="btn btn-info">Sign Up!</button>
+        </form>
+        <hr>
+        <div class="text-center">
+            Do you already have an account? <a href="{% url 'loginuser' %}">Login here</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

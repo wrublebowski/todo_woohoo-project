@@ -1,29 +1,29 @@
 {% extends 'todo_app/base.html' %}
 
 {% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
 <div class="row justify-content-center mt-5">
-  <div class="col-md-8 text-center">
-    <br><br><br>
+  <div class="col-md-9 text-center">
     <h2 class="font-weight-bold">Plan your tasks with Todo-Woohoo</h2>
-    <h4 class="font-weight-bold">Start now and forget about forgetting</h4>
+    <p class="font-weight-bold">Start now and forget about forgetting! You can keep your busy day organised by creating new todos
+    and describing details about them. Also mark your task as 'important' to make it bold on your control panel. You can always check your
+  completed todos or delete it when you're no longer proud of it. Have funk!</p>
   </div>
 </div>
 {% if user.is_authenticated %}
 <div class="row justify-content-center mt-5">
-  <form action="{% url 'logoutuser' %}", method='POST'>
-    {% csrf_token %}
-    <button type="submit" class="btn btn-primary">Log out</button>
-  </form>
+    <a href="{% url 'currenttodos' %}" class="btn btn-info" type="button" aria-pressed="true" method='POST'>Start</a>
 </div>
-
 {% else %}
 
 <div class="row justify-content-center mt-5">
-    <a href="{% url 'signupuser' %}" class="btn btn-dark active" role="button" aria-pressed="true"  method='POST'>sign up</a>
+    <a href="{% url 'signupuser' %}" class="btn btn-info" type="button" aria-pressed="true" method='POST'>Start</a>
 </div>
-<div class="row justify-content-center mt-3">
-    <a href="{% url 'loginuser' %}" class="btn btn-secondary active" role="button" aria-pressed="true" method="POST">log in</a>
-</div>
+
 {% endif %}
 
 {% endblock %}

@@ -1,20 +1,18 @@
-{% extends 'todo_app/base.html' %}
+{% extends "todo_app/base.html" %}
 
 {% block content %}
-<div class="row justify-content-center mt-5">
-  <h2>Your completed tasks</h2>
-</div>
-<div class="row justify-content-center mb-3">
-  <ul>
-    {% for todo in all_todos %}
-    <li>
-      <a href="{% url 'viewtodo' todo.id %}">
-      {% if todo.important %}<b>{% endif %}{{ todo.task }}{% if todo.important %}</b>{% endif %}<br>
-      {% if todo.description %}{{ todo.description }}{% endif %}<br>
-      {{ todo.completiontime|date:'M j Y H:i' }}<br><br>
-      </a>
-    </li>
-    {% endfor %}
-  </ul>
-</div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+            <h1>Consider it done</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+            <div class="list-group">
+                {% for todo in all_todos %}
+                    <a href="{% url 'viewtodo' todo.id %}" class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %}"><b>{{ todo.task }}</b> - Completed on {{ todo.completiontime|date:'M j Y H:i' }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
